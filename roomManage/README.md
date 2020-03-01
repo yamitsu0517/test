@@ -16,7 +16,7 @@
 ## 環境構築
 1.データベース
  ```bash
-CREATE DATABASE [IF NOT EXISTS] roomManage;
+CREATE DATABASE IF NOT EXISTS roomManage;
 
 use roomManage;
 
