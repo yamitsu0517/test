@@ -51,7 +51,7 @@ return [
         'namespace' => 'App',
         'encoding' => env('APP_ENCODING', 'UTF-8'),
         'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
-        'defaultTimezone' => env('APP_DEFAULT_TIMEZONE', 'UTC'),
+        'defaultTimezone' => env('APP_DEFAULT_TIMEZONE', 'Asia/Tokyo'),
         'base' => false,
         'dir' => 'src',
         'webroot' => 'webroot',
@@ -76,7 +76,7 @@ return [
      *   You should treat it as extremely sensitive data.
      */
     'Security' => [
-        'salt' => env('SECURITY_SALT', '__SALT__'),
+        'salt' => env('SECURITY_SALT', '16b8df9ca5f0cbc0f66508fb3abaeb4e20ebcfb882ee769c6fb6571eb24d9a24'),
     ],
 
     /**
@@ -263,14 +263,14 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'non_standard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'my_app',
+            'username' => 'root',
+            'password' => '',
+            'database' => 'roomManage',
             /*
              * You do not need to set this flag to use full utf-8 encoding (internal default since CakePHP 3.6).
              */
-            //'encoding' => 'utf8mb4',
-            'timezone' => 'UTC',
+            'encoding' => 'utf8',
+            'timezone' => '+9:00',
             'flags' => [],
             'cacheMetadata' => true,
             'log' => false,
@@ -310,7 +310,7 @@ return [
             'password' => 'secret',
             'database' => 'test_myapp',
             //'encoding' => 'utf8mb4',
-            'timezone' => 'UTC',
+            'timezone' => '+9:00',
             'cacheMetadata' => true,
             'quoteIdentifiers' => false,
             'log' => false,
