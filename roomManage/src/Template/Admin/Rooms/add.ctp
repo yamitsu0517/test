@@ -7,6 +7,9 @@ echo "<tr>";
         'label' => '',
     )) . "</td>";
 echo "</tr>";
+echo $this->Form->hidden('deleted_flg', array(
+    'value' => '',
+));
 echo "<tr>";
 echo "<td colspan='2'>";
     echo $this->Form->button('登録する');

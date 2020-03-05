@@ -30,7 +30,7 @@ class HomesController extends AppController {
 
         // $calendarOutput = $this->get_rsv_calendar($getYear, $getDate, $date);
         $calendarOutput ="2";
-        $this->set(compact('homeMenus', 'calendarOutput', 'auth', 'usr', 'hasAuth'));
+        $this->set(compact('homeMenus', 'calendarOutput', 'usr', 'hasAuth'));
 
         if ($this->request->is('post')) {
             $dateData = $this->request->data;

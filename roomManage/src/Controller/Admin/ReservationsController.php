@@ -48,7 +48,6 @@ class ReservationsController extends AppController {
                     ->contain(['rooms', 'users'])
                     ->where(['reservations.start_time >=' => $date . " 00:00:00", 
                             'reservations.end_time <=' => $date . " 23:59:59"]);
-
         // 今日の日付を取得 
         $today = date('Y-m-d'); //YYYY-MM-DDの形
         
@@ -68,7 +67,7 @@ class ReservationsController extends AppController {
             }
         }
 
-        $this->set(compact('reservation'));
+//        $this->set(compact('reservation'));
         
 
         /*
@@ -125,20 +124,34 @@ class ReservationsController extends AppController {
     }
 
 
-    private function insert($data, $id, $reservationData) {
+
+    /*
+     * @param  date 'YYYY-mm-dd' 形式
+     * @param  id   ログインユーザのID
+     * @param  reservationData 該当日時のデーダ
+     * @return 挿入処理 or 失敗
+     */
+    private function insert($date, $id, $reservationData) {
         $reservation = $this->Reservations->newEntity();
             if ($this->request->is('post')) {
-
+                
                 $request = $this->request;
-                $start_time = $data .' ' . $request->data('start_time') . ':00';
-                $end_time   = $data .' ' . $request->data('end_time') . ':00'; 
+                $start_time = $date .' ' . $request->data('start_time') . ':00';
+                $end_time   = $date .' ' . $request->data('end_time') . ':00'; 
                 $room_id    = $request->data('room_id');
-
+                $purpose    = $request->data('purpose');
+                
+                $add_data = array(
+                    'start_time' => $start_time,
+                    'end_time'   => $end_time,
+                    'room_id'    => $room_id,
+                    'purpose'    => $purpose
+                );
                 // validate check
-                $validate = $this->validate($start_time, $end_time, $room_id, $reservationData);
-
+                $validate = $this->validate($add_data, $reservationData);
+                
                 // 日付用の - 抜き文字作成
-                $day = str_replace('-', '', $data);
+                $day = str_replace('-', '', $date);
 
                 if ($validate['result'] == 'False') {
                     $this->Flash->error(__($validate['message']));
@@ -150,7 +163,8 @@ class ReservationsController extends AppController {
                     $reservation->purpose = $request->data('purpose');
                     $reservation->kwd = $request->data('kwd');
                     $reservation->deleted_flg = $request->data('deleted_flg');
-
+                    debug($reservation);
+                    exit;
                     if ($this->Reservations->save($reservation)) {
                         // ユーザ作成と同じセッションに代入
                         // $this->MyAuth->setUser($reservation);
@@ -167,9 +181,41 @@ class ReservationsController extends AppController {
     }
 
     // 開始時間と、終了時間がか被っていないかチェックする。
-    private function validate($start_time, $end_time, $room_id, $reservationData) {
+    private function validate($add_data, $reservationData=null) {
+        // foreach の中に入ったかどうか確認
+        $confirm_flg = False;
+        debug($add_data['room_id']);
+        // 開始時間が格納されているか確認
+        if ($add_data['start_time'] == '') {
+            return array(
+                'result' => 'False',
+                'message' =>'開始時間を入力してください。'
+            );
+        }
+        // 終了時間が格納されているか確認
+        if ($add_data['end_time'] == '') {
+            return array(
+                'result' => 'False',
+                'message' => '終了時間を入力してください。'
+            );
+        }
+        // 部屋が格納されているか確認
+        if ($add_data['room_id'] == '' || $add_data['room_id'] == 0) {
+            return array(
+                'result' => 'False',
+                'message' => '使用する部屋の値は適正な値を入力してください。'
+            );
+        }
+        // 目的が格納されているか確認
+        if ($add_data['purpose'] == '') {
+            return array(
+                'result' => 'False',
+                'message' => '使用目的を記入してください。'
+            );
+        }
+
         foreach ($reservationData as $reservation) {
-          
+            $confirm_flg = True; 
             $time_st  = strtotime($reservation->start_time);
             $time_end = strtotime($reservation->end_time);
 
@@ -180,8 +226,7 @@ class ReservationsController extends AppController {
             $time_st_m  = date('i', strtotime($reservation->start_time));
             $time_end_m = date('i', strtotime($reservation->end_time));
 
-            // 目的を格納
-            $purpose = $reservation->purpose;
+            // 時間判定
             if ($time_st_h <  9 || $time_st_h > 21) {
                 return array(
                     'result' => 'False',
@@ -198,23 +243,23 @@ class ReservationsController extends AppController {
                     'result' => 'False',
                     'message' => '分は30分単位にしてください。'
                 );
-            
+            // 目的判定
             } elseif ($purpose == "" || $purpose ==null) {
                 return array(
                     'result' => 'False',
                     'message' => '目的を記入してください。'
                 );
             } 
-            debug($purpose);
-            // exit;
+            // 部屋と時間が被っていないか判定
             if ($room_id == $reservation->room_id) {
-                if ( strtotime($start_time) <= $time_st && $time_st < strtotime($end_time) ) {
+                // 開始時間 <= 予約されている開始時間 && 予約されている開始時間 < 終了時間
+                if ( strtotime($add_data['start_time']) <= $time_st && $time_st < strtotime($add_data['end_time']) ) {
                     $flg = "False";
                 }
-                if ( strtotime($start_time) < $time_end && $time_end <= strtotime($end_time) ) {
+                if ( strtotime($add_data['start_time']) < $time_end && $time_end <= strtotime($add_data['end_time']) ) {
                     $flg = "False"; 
                 }
-                if ( $time_st <= strtotime($start_time) && strtotime($end_time) <= $time_end ) {
+                if ( $time_st <= strtotime($add_data['start_time']) && strtotime($add_data['end_time']) <= $time_end ) {
                     $flg = "False"; 
                 } 
                 if ($reservation->deleted_flg == 1) {
@@ -224,7 +269,7 @@ class ReservationsController extends AppController {
                     );
                 }
                 return array(
-                    'result' => 'False',
+                    'result' => $flg,
                     'message' => 'すでに予約されています。'
                 );
             }
@@ -235,6 +280,12 @@ class ReservationsController extends AppController {
                 'message' => '登録できちゃった。'
             );
         }
+        // foreach の中に入らなかったら。（テーブルにデータがないとき）
+        if ($confirm_flg === False) {
+            return array(
+                'result' => "False",
+                'message' => 'すでに予約されています。'
+            );
+        }
     }
-
 }

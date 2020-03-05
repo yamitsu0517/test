@@ -29,7 +29,8 @@ class RoomsController extends AppController {
 
     public function add() {
         $this->loadModel('users');
-      //  $this->loadModel('rooms');
+        $this->loadModel('rooms');
+
         $id =$this->MyAuth->user('id');
         $hasAuth = $this->MyAuth->user('auth');
         $this->set(compact('id', 'hasAuth'));
@@ -38,19 +39,21 @@ class RoomsController extends AppController {
 
         if ($this->request->is('post')) {
             $room->name = $this->request->data('name'); 
-
+            $room->deleted_flg = '';
+            dump($room);
+            exit;
             if ($this->Rooms->save($room)) {
               $this->Flash->success(__('部屋を新規追加しました。'));
               return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('商品の新規登録に失敗しました。'));
+            $this->Flash->error(__('部屋のの新規登録に失敗しました。'));
         }
         $this->set(compact('room'));
         
     }
 
     public function edit ($room_id) {
-        $room = $this->Rooms->findById($room_id)->fiirst;
+        $room = $this->Rooms->findById($room_id)->first;
     }
 
     function h($str) {

@@ -28,12 +28,12 @@ class RoomsTable extends Table {
         
         $validator  
             ->requirePresence('name', 'create')
-            ->notEmpty('name')
-            ->add('name', 'unique', [
+            ->notEmpty('name');
+//            ->add('name', 'unique', [
               //  'rule' => 'validateUnique',
-                'provider' => 'table',
-                'message' => '登録できません'
-            ]);
+  //              'provider' => 'table',
+    //            'message' => '登録できません'
+      //      ]);
         
         return $validator;
     }
