@@ -5,7 +5,13 @@ console.log("this ");
 </script>
 <link rel="stylesheet" href="sample.css">
 <div class="head">
-    <div class="head-text">Header</div>
+    <img class="narita-logo1" src="img/narita-logo2.png">
+    <div class="head-text">
+        <div>
+            <img class="wheelchair" src="img/wheelchair.png">
+            <p class="wheelchair">お手伝いの必要なお客様へ</p>
+        </div>
+    </div>
 </div>
 <div class="content">
     <div class="content-left">

@@ -1,3 +1,48 @@
 .head {
-    
+    text-align : center;
+    width : 100%;
+    position : relative;
+}
+
+.narita-logo1 {
+    width : 12em;
+    height : 6em;
+}
+
+.wheelchair {
+    background : url("img/wheelchair.png");
+    height :12px;
+    width :13px;
+}
+p.wheelchair::before {
+    background : url("img/wheelchair.png");
+    height :12px;
+    width :13px;
+}
+
+.content {
+    text-align : center;
+    margin : 20px;
+    width : 1000
+}
+.content .content-left {
+    float : left;
+    width : 330px
+    height: 72px;
+}
+.content .content-center {
+    float : left;
+    width ; 330px
+    height: 72px;
+}
+
+.content .content-right {
+    float : left;
+    width ; 330px;
+    height: 72px;
+}
+
+.foot {
+    text-align : center;
+    clear :both;
 }
