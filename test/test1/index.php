@@ -11,27 +11,40 @@ console.log("this ");
     <div class="head-text">
         <ul class="head-ul1">
             <li class="wheelchair">
-                <a class="top-btn" href="javascript:void(0)">お手伝いの必要なお客様へ</a>
+                <a class="top-btn" href="javascript:void(0)"><span>お手伝いの必要なお客様へ</span></a>
             </li>
             <li class="question">
-                <a class="top-btn" href="javascript:void(0)">よくあるご質問</a>
+                <a class="top-btn" href="javascript:void(0)"><span>よくあるご質問</span></a>
             </li>
         </ul>
         <ul class="head-ul2">
             <li class="eng">
-                <a class="top-btn" href="javascript:void(0)">English</a>
+                <a class="top-btn" href="javascript:void(0)"><span>English</span></a>
             </li>
             <li class="kre">
-                <a class="top-btn" href="javascript:void(0)">ハングル</a>
+                <a class="top-btn" href="javascript:void(0)"><span>ハングル</span></a>
             </li>
             <li class="chi1">
-                <a class="top-btn" href="javascript:void(0)">中国1</a>
+                <a class="top-btn" href="javascript:void(0)"><span>中国1</span></a>
             </li>
             <li class="chi2">
-                <a class="top-btn" href="javascript:void(0)">中国2</a>
+                <a class="top-btn" href="javascript:void(0)"><span>中国2</span></a>
             </li> 
             <li class="search">
-                <a class="top-btn" href="javascript:void(0)">検索</a>
+                <a class="top-btn" href="javascript:void(0)"><span>検索</span></a>
+            </li>
+        </ul>
+    </div>
+    <div class="plan">
+        <ul class="head-ul3">
+            <li class="get-plane">
+                <a class="top-btn" href="javascript:void(0)"><span>飛行機に乗る</span></a>
+            </li>
+            <li class="spend-airport">
+                <a class="top-btn" href="javascriot:void(0)"><span>空港で過ごす</span></a>
+            </li>
+            <li class="access-traffic">
+                <a class="top-btn" href="javascript:void(0)"><span>交通アクセス</span></a>
             </li>
         </ul>
     </div>
