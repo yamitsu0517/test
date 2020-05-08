@@ -9,6 +9,7 @@ console.log("this ");
       <img class="narita-logo2" src="img/narita-logo2.png">
     </div>
     <div class="head-text">
+<p>
         <ul class="head-ul1">
             <li class="wheelchair">
                 <a class="top-btn" href="javascript:void(0)"><span>お手伝いの必要なお客様へ</span></a>
@@ -17,6 +18,8 @@ console.log("this ");
                 <a class="top-btn" href="javascript:void(0)"><span>よくあるご質問</span></a>
             </li>
         </ul>
+</p>
+<p>
         <ul class="head-ul2">
             <li class="eng">
                 <a class="top-btn" href="javascript:void(0)"><span>English</span></a>
@@ -34,8 +37,10 @@ console.log("this ");
                 <a class="top-btn" href="javascript:void(0)"><span>検索</span></a>
             </li>
         </ul>
+</p>
     </div>
-    <div class="plan">
+    <div class="head-text">
+<p>
         <ul class="head-ul3">
             <li class="get-plane">
                 <a class="top-btn" href="javascript:void(0)"><span>飛行機に乗る</span></a>
@@ -47,6 +52,16 @@ console.log("this ");
                 <a class="top-btn" href="javascript:void(0)"><span>交通アクセス</span></a>
             </li>
         </ul>
+</p>
+<!--        <nav>
+            <a class="top-btn" href="javascript:void(0)">飛行機に乗る</a>
+        </nav>
+        <nav>
+            <a class="top-btn" href="javascript:void(0)">空港で過ごす</a>
+        </nav>
+        <nav>
+            <a class="top-btn" href="javascript:void(0)">飛行機に乗る</a>
+        </nav>-->
     </div>
 </div>
 <div class="content">

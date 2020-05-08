@@ -8,6 +8,7 @@
     position : relative;
     margin : 0 60px;
     padding : 0 12em;
+    background : #003a77;
 }
 .header-logo {
     width : 20%;
@@ -22,8 +23,9 @@
     vertical-align: middle;
 }
 
-.header-text {
+.head-text {
     width : 80%;
+    float : left;
 }
 
 .head-ul1 > li {
@@ -52,10 +54,12 @@ li.wheelchair::before {
 .plan {
     clear : both;
 }
+
 .head-ul3 > li {
     list-style : none;
     margin-left : 1.5em;
     float : left;
+    flex-wrap: wrap;
 }
 .content {
     text-align : center;
