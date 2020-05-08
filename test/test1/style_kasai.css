@@ -1,0 +1,126 @@
+* {
+    margin : 0;
+    padding : 0;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+.head-text a:hover{
+    border-bottom: 1px solid white;
+}
+.head {
+    overflow: hidden;
+    text-align : center;
+    width : 100%;
+    position : relative;
+    margin : 0 5%;
+    /* padding : 0 12em; */
+}
+.header-logo {
+    width : 20%;
+}
+.narita-logo2 {
+    width : 12em;
+    height : 6em;
+    float : left;
+    margin :0 auto;
+    background-size: contain;
+    vertical-align: middle;
+}
+.head-text {
+    border: 1px solid;
+    box-sizing: border-box;
+    border-color: #003366 #003366 #0000FF #0000FF;
+    background-color: #003366;
+    color: white;
+    overflow: hidden;
+    width : 75%;
+    height: 2em;
+}
+.head-ul1 > li {
+    list-style : none;
+    margin-left : 1.5em;
+    float :left;
+    line-height: 12px;
+}
+.head-ul2 > li {
+    list-style : none;
+    margin-left : 1.5em;
+    float : left;
+}
+li.wheelchair::before {
+    display: inline-block;
+    height :13px;
+    width :14px;
+    background-image : url('img/wheelchair.png');
+    content : ''; /*何も入れない*/
+    background-size: contain;
+    vertical-align: middle;
+}
+.top-btn {
+    line-height : 24px;
+}
+.plan {
+    background-color: #003366;
+    overflow: hidden;
+    width : 75%;
+    height: 4em;
+    /* clear : both; */
+}
+.head-ul3 > li {
+    list-style : none;
+    width : 33%;
+    /* margin-left : 1.5em; */
+    float : left;
+    /* font-size: 2em; */
+}
+.head-ul3 li:first-child{
+    border: 1px solid;
+    border-color:#003366 #003366 #003366 #0000FF;
+}
+.head3-btn{
+    text-align: center;
+    height: 4em;
+}
+.head3-btn:hover{
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.head3-btn a{
+    line-height: 4em;
+}
+.line{
+    /* margin-left: 100px; */
+    float : left;
+    width: 1px;
+    height: 25px;
+    background-color: #0000FF;
+    margin-top: 17px;
+    margin-left: 1px;
+}
+.content {
+    text-align : center;
+    margin : 20px;
+    width : 1000;
+    clear :both;
+}
+.content .content-left {
+    float : left;
+    width : 330px;
+    height: 72px;
+}
+.content .content-center {
+    float : left;
+    width : 330px;
+    height: 72px;
+}
+.content .content-right {
+    float : left;
+    width : 330px;
+    height: 72px;
+}
+.foot {
+    text-align : center;
+    clear :both;
+}
