@@ -1,9 +1,9 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 <script src="sample.js">
-    <script >
+    < script >
         console.log("this ");
 </script>
-<link rel="stylesheet" href="style_kasai.css">
+<link rel="stylesheet" href="sample.css">
 <div class="head">
     <div class="header-logo">
         <img class="narita-logo2" src="img/narita-logo2.png">
