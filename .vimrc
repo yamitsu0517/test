@@ -1,4 +1,4 @@
-" settinig
+" setting
 "文字コードをUFT-8に設定
 set fenc=utf-8
 " バックアップファイルを作らない
@@ -11,13 +11,21 @@ set autoread
 set hidden
 " 入力中のコマンドをステータスに表示する
 set showcmd
+" 保存されていないと確認する
+set confirm
+" マウスの入力を受け付ける
+set mouse=n
 " Tab 4文字分
 set tabstop=4
 " 改行時に前の行のインデントを継続する
 set autoindent
+" 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
+set smartindent
 " ペア括弧やを表示する
 set showmatch
 
+"ステータスライン
+set statusline=%F%m%h%w\ %<[ENC=%{&fenc!=''?&fenc:&enc}]\ [FMT=%{&ff}]\ [TYPE=%Y]\ %=[CODE=0x%02B]\ [POS=%l/%L(%02v)]
 
 
 " 見た目系

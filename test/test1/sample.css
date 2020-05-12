@@ -9,6 +9,15 @@
     margin : 0 60px;
     padding : 0 12em;
     background : #003a77;
+    overflow: hidden;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+.head-text a:hover {
+    border-bottom: 1px solid white;
 }
 .header-logo {
     width : 20%;
@@ -37,7 +46,7 @@
 .head-ul2 > li {
     list-style : none;
     margin-left : 1.5em;
-    float : left;
+    float : right;
 }
 li.wheelchair::before {
     display: inline-block;
