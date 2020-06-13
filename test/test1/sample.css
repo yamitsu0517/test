@@ -2,13 +2,12 @@
     margin : 0;
     padding : 0;
 }
+
 a{
     color: white;
     text-decoration: none;
 }
-.head-text a:hover{
-    border-bottom: 1px solid white;
-}
+
 .head {
     overflow: hidden;
     text-align : center;
@@ -17,9 +16,11 @@ a{
     margin : 0 5%;
     /* padding : 0 12em; */
 }
+
 .header-logo {
     width : 20%;
 }
+
 .narita-logo2 {
     width : 12em;
     height : 6em;
@@ -28,6 +29,7 @@ a{
     background-size: contain;
     vertical-align: middle;
 }
+
 .head-text {
     border: 1px solid;
     box-sizing: border-box;
@@ -38,6 +40,11 @@ a{
     width : 75%;
     height: 2em;
 }
+
+.head-text a:hover{
+    border-bottom: 1px solid white;
+}
+
 .head-ul1 > li {
     list-style : none;
     margin-left : 1.5em;

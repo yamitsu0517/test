@@ -1,8 +1,5 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-<script src="sample.js">
-    < script >
-        console.log("this ");
-</script>
+<script src="sample.js"></script>
 <link rel="stylesheet" href="sample.css">
 <div class="head">
     <div class="header-logo">
