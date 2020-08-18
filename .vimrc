@@ -23,6 +23,8 @@ set autoindent
 set smartindent
 " ペア括弧やを表示する
 set showmatch
+" Yを押した時にクリップボードにもコピーされる
+set clipboard+=unnamed
 
 "ステータスライン
 set statusline=%F%m%h%w\ %<[ENC=%{&fenc!=''?&fenc:&enc}]\ [FMT=%{&ff}]\ [TYPE=%Y]\ %=[CODE=0x%02B]\ [POS=%l/%L(%02v)]
