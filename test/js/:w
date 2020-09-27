@@ -1,0 +1,75 @@
+<div class="contents">
+  <div class="header">
+    <h1>聖地アプリ</h1>
+  </div>
+  <div class="main">
+    <div class="main-img">
+      <img src="./tears_stone.png">
+    </div>
+    <div class="main-text">
+      <div class="left-side">
+        <p>left-side</p>
+      </div>
+      <div class="center">
+          <form class="search_box">
+              <input type="text" name"search" placeholder="目的地・キーワードなどを入力してください" autocomplete="off">
+          </form>
+      </div>
+      <div class="right-side">
+        <p>right-side</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+
+  </div>
+</div>
+<style>
+* {
+  margin : 0;
+  padding : 0;
+}
+.contents {
+  width : 100%;
+}
+.header {
+  text-align : center;
+  position : relative;
+  top : 20px;
+  font-size : 1.5em;
+}  
+.header h1 {
+  border : solid aqua; 
+  width : 50%;
+  margin : auto ;
+  background-color : pink;
+
+}
+.main {
+  text-align : center;
+}
+.main-img {
+  top : 25px;
+  position : relative;
+}
+.main-img img {
+  height : 300px;
+  width : 50%;
+}
+.main-text {
+  text-align : center;
+  margin : auto;
+}
+.left-side {
+  float : left
+}
+.center {
+float : left;
+}
+.search_box {
+  top : 15px;
+}
+.right-side {
+  float : left;
+}
+</style>
