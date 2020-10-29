@@ -23,12 +23,13 @@ set autoindent
 set smartindent
 " ペア括弧やを表示する
 set showmatch
-" Yを押した時にクリップボードにもコピーされる
+" クリップボードにもコピーされる
 set clipboard+=unnamed
 
-"ステータスライン
-set statusline=%F%m%h%w\ %<[ENC=%{&fenc!=''?&fenc:&enc}]\ [FMT=%{&ff}]\ [TYPE=%Y]\ %=[CODE=0x%02B]\ [POS=%l/%L(%02v)]
 
+
+" 上下4行余裕を持たせる
+set scrolloff=4
 
 " 見た目系
 " 行番号を表示
@@ -60,6 +61,8 @@ nnoremap <C-p> gT
 " 行末から行頭へ
 set whichwrap=b,s,h,l,<,>,[,]
 
+"ステータスライン
+set statusline=%F%m%h%w\ %<[ENC=%{&fenc!=''?&fenc:&enc}]\ [FMT=%{&ff}]\ [TYPE=%Y]\ %=[CODE=0x%02B]\ [POS=%l/%L(%02v)]
 
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)
