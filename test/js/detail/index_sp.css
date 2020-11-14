@@ -1,0 +1,34 @@
+body {
+  z-index:1;
+}
+.map {
+  top : 10px;
+}
+#map_btn {
+  text-decoration: none;
+  color : black;
+}
+.close_btn{
+    z-index:3;
+    font-size: 200%;/*ボタンの大きさ*/
+    font-weight: bold;
+    border: 1px solid #999;
+    color: #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    width: 1.3em;
+    line-height: 1.3em;
+    position : absolute;
+    top : 250px;
+}
+.areamap {
+  opacity:0;
+
+}
+.areamap.is_show{
+  opacity:1;
+  visibility:visible;
+  z-index:2;
+}

@@ -1,21 +1,21 @@
 .map_search {
-  width : 100%;
+  width : 98%;
   margin : auto;
   position : relative;
   padding: 5px;
   top : 8px;
   background-color:#fff;
   border-radius:4px;
+  padding : 0px;
 }
 .areaMap{
   position:relative;
   display:block;
-  width:424px;
-  height:218px;
   padding:20px;
   -webkit-box-sizing:border-box;
   box-sizing:border-box;
   line-height:1
+  top : 30px;
 }
 .areaMap_ttl{
   position:absolute;
@@ -33,6 +33,7 @@
   font-size:12px
 }
 .areaMap_map{
+  top:  20px;
   display:block; 
   position:relative;
  /* position:absolute;*/
@@ -70,8 +71,9 @@
 .areaMap_btn a:hover{background:rgba(233, 244, 250, 0.9)}
 .areaMap_link{position:absolute}
 .areaMap_floating {
-  position:relative;
-  top:-219px;
+/*  position:relative;*/
+  position:absolute;
+  top:21px;
   margin:auto;
   float : left;
   height:218px;
