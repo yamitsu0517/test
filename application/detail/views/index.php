@@ -1,11 +1,11 @@
 <?php if ($is_sp) {?>
 <link rel="stylesheet" href="./index_sp.css">
 <?php } else { ?>
-<link rel="stylesheet" href="./index_sp.css">
+<link rel="stylesheet" href="./index_pc.css">
 <?php } ?>
 <div class="content">
   <div class="place_name">
-  <h2><?php echo $data['name']; ?></h2><h2><a id="map_btn" href="javascript:void(0)">マップで確認する</a> </h2>
+  <h2><?php echo $data['name']; ?></h2><h2><a id="map_btn" href="javascript:void(0)">マップで確認する</a></h2>
   </div>
   <div class="areamap">
     <span class="close_btn" id="close_btn">×</span>

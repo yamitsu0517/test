@@ -7,8 +7,13 @@
 <?php } ?>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Ly55z9Cf3Vlr4dK6htrIuYX7dGrdKsI&callback=initMap&libraries=places" async defer></script>
+<?php
+var_dump($data);
+echo "<br>";
+var_dump($_GET);
+?>
 <script>
-if (<?php echo $is_sp; ?>) {
+<?php if (isset($is_sp) && $is_sp) { ?>
     var wsize = $(window).width()-2,
         hsize = $(window).height()
         cbtn_wsize = $(window).width()-50;
@@ -17,14 +22,12 @@ if (<?php echo $is_sp; ?>) {
 
 
     $('#map_btn').on('click', function (){
-        console.log("入ったよ");
         $('.areamap').addClass('is_show'); 
     });
     $('#close_btn').on('click', function (){
-        console.log("入ったよ");
         $('.areamap').removeClass('is_show'); 
     });
-}
+<?php } ?>
 
 var locate_arr = {
   1 : {lat : 35.667062, lng : 139.695101}, // 代々木公園
@@ -55,11 +58,11 @@ console.log(locate_arr['<?php echo $_GET["id"]; ?>']);
       map: map, // マーカーを立てる地図を指定
     });
     var mapOptions = {
-    fullscreenControl: true, //全画面表示コントロール
-    streetViewControl: true, //ストリートビュー コントロール
-    zoomControl: true, //ズーム コントロール
+      fullscreenControl: true, //全画面表示コントロール
+      streetViewControl: true, //ストリートビュー コントロール
+      zoomControl: true, //ズーム コントロール
     };
-
+if (false) {
     var service = new google.maps.places.PlacesService(map);
     service.findPlaceFromQuery({
         query: '駅',
@@ -72,6 +75,7 @@ console.log(locate_arr['<?php echo $_GET["id"]; ?>']);
             }
         }
     });
+}
   };
 
 if (false) {
