@@ -2,14 +2,21 @@
     margin : 0;
     padding : 0;
 }
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
 .head {
+    overflow: hidden;
     text-align : center;
     width : 100%;
     position : relative;
-    margin : 0 60px;
-    padding : 0 12em;
-    background : #003a77;
+    margin : 0 5%;
+    /* padding : 0 12em; */
 }
+
 .header-logo {
     width : 20%;
 }
@@ -24,15 +31,25 @@
 }
 
 .head-text {
-    width : 80%;
-    float : left;
+    border: 1px solid;
+    box-sizing: border-box;
+    border-color: #003366 #003366 #0000FF #0000FF;
+    background-color: #003366;
+    color: white;
+    overflow: hidden;
+    width : 75%;
+    height: 2em;
+}
+
+.head-text a:hover{
+    border-bottom: 1px solid white;
 }
 
 .head-ul1 > li {
     list-style : none;
     margin-left : 1.5em;
     float :left;
-    text-height : 12px
+    line-height: 12px;
 }
 .head-ul2 > li {
     list-style : none;
@@ -49,17 +66,45 @@ li.wheelchair::before {
     vertical-align: middle;
 }
 .top-btn {
-    text-height : 24px;
+    line-height : 24px;
 }
 .plan {
-    clear : both;
+    background-color: #003366;
+    overflow: hidden;
+    width : 75%;
+    height: 4em;
+    /* clear : both; */
 }
-
 .head-ul3 > li {
     list-style : none;
-    margin-left : 1.5em;
+    width : 33%;
+    /* margin-left : 1.5em; */
     float : left;
-    flex-wrap: wrap;
+    /* font-size: 2em; */
+}
+.head-ul3 li:first-child{
+    border: 1px solid;
+    border-color:#003366 #003366 #003366 #0000FF;
+}
+.head3-btn{
+    text-align: center;
+    height: 4em;
+}
+.head3-btn:hover{
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.head3-btn a{
+    line-height: 4em;
+}
+.line{
+    /* margin-left: 100px; */
+    float : left;
+    width: 1px;
+    height: 25px;
+    background-color: #0000FF;
+    margin-top: 17px;
+    margin-left: 1px;
 }
 .content {
     text-align : center;
@@ -69,21 +114,19 @@ li.wheelchair::before {
 }
 .content .content-left {
     float : left;
-    width : 330px
+    width : 330px;
     height: 72px;
 }
 .content .content-center {
     float : left;
-    width ; 330px
+    width : 330px;
     height: 72px;
 }
-
 .content .content-right {
     float : left;
-    width ; 330px;
+    width : 330px;
     height: 72px;
 }
-
 .foot {
     text-align : center;
     clear :both;
