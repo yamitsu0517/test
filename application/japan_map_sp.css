@@ -1,0 +1,126 @@
+.map_search {
+  width : 98%;
+  margin : auto;
+  position : relative;
+  padding: 5px;
+  top : 8px;
+  background-color:#fff;
+  border-radius:4px;
+  padding : 0px;
+}
+.areaMap{
+  position:relative;
+  display:block;
+  padding:20px;
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+  line-height:1
+  top : 30px;
+}
+.areaMap_ttl{
+  position:absolute;
+  top:20px;
+  left:20px;
+  z-index:1;
+  font-weight:bold;
+  font-size:14px
+}
+.areaMap_txt{
+  position:absolute;
+  top:43px;
+  left:20px;
+  z-index:1;
+  font-size:12px
+}
+.areaMap_map{
+  top:  20px;
+  display:block; 
+  position:relative;
+ /* position:absolute;*/
+  z-index : 1;
+  margin : auto;
+  width:424px;
+  height:218px;
+  background:url(./japan_map.png) 0 0 no-repeat;
+  background-size:424px 218px;
+  border : solid 1px;
+  border-radius : 4px;
+}
+.areaMap_btn{position:absolute;width:45px}
+.areaMap_btn-hokkaido{top:30px;left:323px}
+.areaMap_btn-tohoku{top:87px;left:295px}
+.areaMap_btn-kanto{top:140px;left:295px}
+.areaMap_btn-tokai{top:160px;left:235px}
+.areaMap_btn-shinetsu{top:115px;left:235px}
+.areaMap_btn-hokuriku{top:133px;left:175px}
+.areaMap_btn-kinki{top:165px;left:170px}
+.areaMap_btn-chugoku{top:130px;left:120px}
+.areaMap_btn-shikoku{top:168px;left:118px}
+.areaMap_btn-kyushu{top:156px;left:45px}
+.areaMap_btn-okinawa{top:185px;left:5px}
+.areaMap_btn a{
+  display:block;
+  padding:4px 0;
+  background:rgba(255, 255, 255, 0.9);
+  border:1px solid #ccc;
+  border-radius:4px;color:#333;
+  font-size:12px;
+  text-align:center;
+  text-decoration:none
+}
+.areaMap_btn a:hover{background:rgba(233, 244, 250, 0.9)}
+.areaMap_link{position:absolute}
+.areaMap_floating {
+/*  position:relative;*/
+  position:absolute;
+  top:21px;
+  margin:auto;
+  float : left;
+  height:218px;
+  padding:20px 0 20px 20px;
+  background:rgba(255, 255, 255, 0.9);
+  border-radius:4px;
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+  opacity:0;
+  visibility:hidden;
+  -webkit-transition:opacity .2s ease-Out,visibility .2s ease-Out;
+  -o-transition:opacity .2s ease-Out,visibility .2s ease-Out;
+  transition:opacity .2s ease-Out,visibility .2s ease-Out
+}
+.areaMap_floating.is_show{opacity:1;visibility:visible; z-index:2;}
+.areaMap_areaContent{display:none;margin-top:10px;}
+.areaMap_areaContent h3{
+  margin-top : -5px;
+  float : left;
+}
+.areaMap_areaContent.is_active{display:block}
+.areaMap_areaList {
+  clear : left;
+  padding-top : 8px;
+}
+.areaMap_areaList li {
+  float : left;
+  margin : 10px; 
+}
+.areaMap_areaItem {
+  text-decoration:none!important;
+}
+.areaMap_areaItem a {
+  color : #333;
+}
+.ArrowRight::before{content:">  "}
+ul li {
+  list-style : none;
+}
+.areaMap_close{
+  position:absolute;
+  right:20px;
+  bottom:20px;
+  color : #333;
+  text-decoration:none!important;
+}
+.areaMap_close a{
+  color : #333;
+  text-decoration:none!important;
+}
