@@ -13,10 +13,10 @@ $sql_class = new Make_Sql;
 $response = $sql_class->do_sql($sql_param);
 $data = [];
 foreach ($response as $index) {
-    $data['id'] = $index['ID'];
-    $data['name'] = $index['NAME'];
-    $data['location_x'] = $index['LOCATION_X'];
-    $data['location_y'] = $index['LOCATION_Y'];
+    $data['id'] = $index['id'];
+    $data['name'] = $index['name'];
+    $data['location_x'] = $index['location_x'];
+    $data['location_y'] = $index['location_y'];
 }
 $path = '../';
 require_once('../header.php');

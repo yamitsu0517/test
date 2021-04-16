@@ -31,9 +31,12 @@ try {
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $res[] = array(
-        'id'    => $row['ID'],
-        'name'  => $row['NAME'],
-        'area'  => $row['AREA'],
+       // 'id'    => $row['ID'],
+        'id'    => $row['id'],
+       // 'name'  => $row['NAME'],
+        'name'  => $row['name'],
+       // 'area'  => $row['AREA'],
+        'area'  => $row['area'],
     );
     }
     // ヘッダーを指定することによりjsonの動作を安定させる
