@@ -1,0 +1,79 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.common.DataNotFoundException;
+import com.example.demo.dao.BaseDao;
+import com.example.demo.entity.Event;
+import com.example.demo.entity.EventUser;
+import com.example.demo.entity.User;
+
+@Service
+public class EventUserService implements BaseService<EventUser> {
+    @Autowired
+    private BaseDao<EventUser> dao;
+    @Autowired
+    private UserService userService;
+    
+    @Override
+    public List<EventUser> findAll () {
+        return dao.findAll ();
+    }
+    
+    @Override
+    public EventUser findById (Integer id) throws DataNotFoundException {
+        return dao.findById (id);
+    }
+    
+    @Override
+    public void save (EventUser eventUser) {
+        dao.save (eventUser);
+    }
+    
+    @Override
+    public void deleteById (Integer id) {
+        dao.deleteById (id);
+    }
+    
+    /**
+     * 
+     * @param user
+     * @param event
+     * @return
+     */
+    public EventUser findby (User user, Event event) {
+        List<EventUser> eventUsers = dao.findAll ().stream ()
+                .filter (eventUser -> eventUser.getEvent ().getId () == event.getId ()
+                        && eventUser.getUser ().getId () == user.getId ())
+                .toList ();
+        if (eventUsers.size () == 1) {
+            return eventUsers.get (0);
+        }
+        return null;
+    }
+    
+    /**
+     * イベントIDに紐づくイベント参加者を取得
+     * 
+     * @param  id イベントID
+     * @return    イベント参加者
+     */
+    public List<User> findEventUsersById (Integer id) {
+        List<User> eventUsers = dao.findAll ().stream ().filter (eventUser -> eventUser.getEvent ().getId () == id)
+                // .toList ();
+                .map (eventUser -> {
+                    try {
+                        return userService.findById (eventUser.getUser ().getId ());
+                    } catch (DataNotFoundException e) {
+                        // TODO 自動生成された catch ブロック
+                        e.printStackTrace ();
+                    }
+                    return null;
+                }).filter (user -> user != null).toList ();
+        return eventUsers;
+        
+    }
+}

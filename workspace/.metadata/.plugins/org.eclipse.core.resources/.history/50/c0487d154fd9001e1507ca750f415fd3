@@ -1,0 +1,8 @@
+package com.example.demo.common;
+
+//import org.apache.commons.logging.LogFactory;
+
+public class Log {
+    
+    private static Log log = LogFactory.getLog (T.class);
+}

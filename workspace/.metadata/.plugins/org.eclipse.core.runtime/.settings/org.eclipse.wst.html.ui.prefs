@@ -1,0 +1,10 @@
+commentBorder=\#4e8f00 | null | false | false | false | false
+commentText=\#4e8f00 | null | false | false | false | false
+eclipse.preferences.version=1
+elementNamesToIgnore=router-view
+html_content_assist_default_page_sort_order=org.eclipse.wst.html.ui.proposalCategory.htmlTags\u0000org.eclipse.wst.html.ui.proposalCategory.generic\u0000org.eclipse.wst.css.ui.proposalCategory.css\u0000org.eclipse.wst.html.ui.proposalCategory.htmlTemplates\u0000org.eclipse.wst.css.ui.proposalCategory.cssTemplates\u0000
+html_content_assist_display_on_default_page=org.eclipse.wst.html.ui.proposalCategory.generic\u0000
+html_content_assist_own_page_sort_order=org.eclipse.wst.html.ui.proposalCategory.htmlTemplates\u0000org.eclipse.wst.css.ui.proposalCategory.cssTemplates\u0000org.eclipse.wst.html.ui.proposalCategory.htmlTags\u0000org.eclipse.wst.css.ui.proposalCategory.css\u0000org.eclipse.wst.html.ui.proposalCategory.generic\u0000
+newFileTemplateName=\u65B0\u898F HTML \u30D5\u30A1\u30A4\u30EB (5)
+org.eclipse.wst.sse.ui.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+tagAttributeValue=\#0080ff | null | false | false | false | false

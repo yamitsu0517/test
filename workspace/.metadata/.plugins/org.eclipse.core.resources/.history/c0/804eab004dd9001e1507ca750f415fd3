@@ -1,0 +1,153 @@
+package com.example.demo.web.admin;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.example.demo.common.DataNotFoundException;
+import com.example.demo.common.FlashData;
+import com.example.demo.entity.Order;
+import com.example.demo.entity.OrderDetail;
+import com.example.demo.entity.Product;
+import com.example.demo.service.BaseService;
+
+import jakarta.validation.Valid;
+
+@Controller
+@RequestMapping ("/admin/orderdetails")
+public class OrderDetailsController {
+    @Autowired
+    BaseService<Order> orderService;
+    @Autowired
+    BaseService<OrderDetail> orderDetailService;
+    @Autowired
+    BaseService<Product> productService;
+    
+    /*
+     * 新規作成画面表示
+     */
+    @GetMapping (value = "/create/{id}")
+    public String form (@PathVariable Integer id, Order order, OrderDetail orderDetail, Product product, Model model) {
+        model.addAttribute ("order", order);
+        model.addAttribute ("orderId", id);
+        model.addAttribute ("orderDetail", orderDetail);
+        model.addAttribute ("product", product);
+        return "admin/orderdetails/create";
+    }
+    
+    /*
+     * 新規登録
+     */
+    @PostMapping (value = "/create/")
+    public String register (@Valid String orderId, @Valid OrderDetail orderDetail, @Valid Product product,
+            @Valid Integer unit, BindingResult result, Model model, RedirectAttributes ra) {
+        FlashData flash;
+        try {
+            if (result.hasErrors ()) {
+                return "admin/orders/";
+            }
+            System.out.println (orderId);
+            System.out.println (product);
+            System.out.println (unit);
+            orderDetail.setProduct (product);
+            orderDetail.setUnit (unit);
+            Order order = new Order ();
+            
+            order.setId (Integer.parseInt (orderId));
+            orderDetail.setOrder (order);
+            System.out.println (orderDetail);
+            // 新規登録
+            orderDetailService.save (orderDetail);
+            flash = new FlashData ().success ("新規作成しました");
+        } catch (Exception e) {
+            flash = new FlashData ().danger ("処理中にエラーが発生しました");
+        }
+        ra.addFlashAttribute ("flash", flash);
+        return "redirect:/admin/orderdetails/view/" + orderId;
+    }
+    
+    /**
+     * 受注表示
+     * 
+     * @throws DataNotFoundException
+     */
+    @GetMapping (value = "/view/{id}")
+    public String view (@PathVariable Integer id, Model model) throws DataNotFoundException {
+        try {
+            Order order = orderService.findById (id);
+            
+            model.addAttribute ("order", order);
+            model.addAttribute ("total", total (order.getOrderDetails ()));
+            
+        } catch (DataNotFoundException e) {
+            // TODO 自動生成された catch ブロック
+            throw e;
+            
+        }
+        
+        return "admin/orderdetails/orderDetail";
+    }
+    
+    /**
+     * 受注編集画面
+     * 
+     * @throws DataNotFoundException
+     */
+    @GetMapping (value = "/edit/{id}")
+    public String edit (@PathVariable Integer id, Model model) throws DataNotFoundException {
+        try {
+            OrderDetail orderDetail = orderDetailService.findById (id);
+            
+            model.addAttribute ("orderDetail", orderDetail);
+            // System.out.println (order);
+        } catch (DataNotFoundException e) {
+            // TODO 自動生成された catch ブロック
+            throw e;
+            
+        }
+        
+        return "admin/orderdetails/edit";
+    }
+    
+    /*
+     * 更新
+     */
+    @PostMapping (value = "/edit/{id}")
+    public String update (@PathVariable Integer id, @Valid OrderDetail orderDetail, BindingResult result, Model model,
+            RedirectAttributes ra) {
+        FlashData flash;
+        Integer orderId;
+        try {
+            if (result.hasErrors ()) {
+                // OrderDetail orderDetail = orderDetailService.findById (id);
+                return "admin/orderdetails/edit";
+            }
+            // 更新
+            OrderDetail requestOrderDetail = orderDetailService.findById (id);
+            orderDetail.setOrder (requestOrderDetail.getOrder ());
+            
+            orderId = requestOrderDetail.getOrder ().getId ();
+            orderDetailService.save (orderDetail);
+            flash = new FlashData ().success ("更新しました");
+        } catch (DataNotFoundException e) {
+            flash = new FlashData ().danger ("該当データがありません");
+        }
+        ra.addFlashAttribute ("flash", flash);
+        return String.format ("redirect:/admin/orderdetails/view/%s", orderId);
+    }
+    
+    private Integer total (List<OrderDetail> orderDetails) {
+        if (orderDetails.isEmpty () || orderDetails == null) {
+            return 0;
+        }
+        return orderDetails.stream ().mapToInt (it -> it.getUnit () * it.getProduct ().getPrice ()).sum ();
+    }
+}

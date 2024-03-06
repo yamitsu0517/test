@@ -1,0 +1,48 @@
+package com.example.demo.web.admin;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.entity.Chat;
+import com.example.demo.service.ChatService;
+import com.example.demo.service.UserService;
+
+@Controller
+@RequestMapping ("/admin/chats")
+// ログイン後TOP画面関連のコントローラ
+
+public class ChatsController {
+    @Autowired
+    ChatService chatService;
+    
+    @Autowired
+    UserService userService;
+    
+    /**
+     * ダッシュボード表示
+     * 
+     * @param  model モデル
+     * @return
+     */
+    @GetMapping (path = { "/talk/{id}", "" })
+    public String list (@PathVariable Integer id, Model model) {
+        List<Chat> chats = chatService.findAll ();
+        
+        // ダッシュボードで表示するリンク
+        Map<String, String> links = new LinkedHashMap<String, String> ();
+        links.put ("/admin/orders", "受注一覧");
+        links.put ("/admin/categories", "カテゴリ一覧");
+        links.put ("/admin/customers", "顧客一覧");
+        model.addAttribute ("links", links);
+        return "admin/admin/list";
+    }
+    
+}

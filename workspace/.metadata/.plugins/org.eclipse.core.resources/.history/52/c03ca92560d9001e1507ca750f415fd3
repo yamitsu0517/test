@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+  <head>
+    <meta charset="UTF-8" th:remove="tag">
+    <script th:src="@{/js/script.js}"></script>
+  </head>
+  <body>
+	<div layout:fragment="content">
+	      <h1 th:text="${event.getName ()}"></h1>
+	      <table class="table table-striped mt-4">
+	        	<tbody>
+					<div class="container">
+					  <div class="row" th:each="chat: ${chats}" th:object="${chat}">
+						<div class="mb-3 border border-4 flex-column col-sm-8 col-md-3"
+						
+							 th:classappend="| ${chat.getUser.getId == myId ? 
+							 'float-end border-success bg-success text-light offset-md-6' : 
+							 'float-start col-md-4<'}|">
+						  <p th:text="*{getUser.getUsername}"></p>
+						  <p th:text="*{getBody}"></p>
+						  <p th:text="*{#dates.format(modifiedAt, 'yyyy年MM月dd日HH時mm分ss秒')}">	</p>
+					  	</div>  
+					  </div>
+						
+					</div>
+		        </tbody>
+	      	</table>
+			<form th:action="@{/admin/chats/create/}" th:object="${chat}" method="post">
+				<div class="form-group" th:classappend="${#fields.hasErrors()} ? error">
+      				<label for="name">body</label>
+          			<input class="form-control" type="text" id="body" name="body"　value="" placeholder="本文を入力してください。">
+          			<input type="hidden" id="eventId" name="eventId" th:value="${event.getId()}">
+        		</div>
+          		<div>
+		          <input class="btn btn-primary" type="submit" value="送信">
+      			</div>	
+			</form>
+
+	</div>
+  </body>
+</html>
+

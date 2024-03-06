@@ -1,0 +1,50 @@
+package com.example.demo.service;
+
+import java.util.Comparator;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.common.DataNotFoundException;
+import com.example.demo.dao.BaseDao;
+import com.example.demo.entity.Chat;
+
+@Service
+public class ChatService implements BaseService<Chat> {
+    @Autowired
+    private BaseDao<Chat> dao;
+    
+    @Override
+    public List<Chat> findAll () {
+        return dao.findAll ();
+    }
+    
+    @Override
+    public Chat findById (Integer id) throws DataNotFoundException {
+        return dao.findById (id);
+    }
+    
+    @Override
+    public void save (Chat customer) {
+        dao.save (customer);
+    }
+    
+    @Override
+    public void deleteById (Integer id) {
+        dao.deleteById (id);
+    }
+    
+    public List<Chat> findByEventId (Integer eventId) {
+        List<Chat> allChats = findAll ();
+        
+        // Comparator作成
+        // Comparator
+        Comparator<Chat> comparator = Comparator.comparing (Chat::getId);
+        // 投稿者名でソート
+        list.stream ().sorted (comparator)
+                .forEach (a -> System.out.println (a.getContributor () + " " + a.getDate () + " " + a.getGoodCount ()));
+        
+        return allChats.stream ().filter (it -> it.getEventId () == eventId).sorted (comparator).toList ();
+    }
+}

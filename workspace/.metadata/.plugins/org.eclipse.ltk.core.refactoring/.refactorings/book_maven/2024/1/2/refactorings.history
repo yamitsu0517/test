@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="リソース名 &apos;book_maven/src/main/resources/templates/category&apos; を &apos;categories&apos; に変更します" description="リソース &apos;category&apos; の名前変更" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/category" name="categories" stamp="1704806970532" updateReferences="true"/>&#x0A;<refactoring comment="リソース名 &apos;book_maven/src/main/resources/templates/book&apos; を &apos;books&apos; に変更します" description="リソース &apos;book&apos; の名前変更" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/book" name="books" stamp="1704807253705" updateReferences="true"/>
+</session>

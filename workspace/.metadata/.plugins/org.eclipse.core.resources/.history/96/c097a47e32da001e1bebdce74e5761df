@@ -1,0 +1,87 @@
+package com.example.demo.web;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.common.DataNotFoundException;
+import com.example.demo.entity.Event;
+import com.example.demo.entity.User;
+import com.example.demo.service.EventService;
+
+@Controller
+@RequestMapping ("/")
+// ユーザ関係の処理を行うコントローラ
+
+public class IndexController {
+    @Autowired
+    EventService eventService;
+    
+    /*
+     * 初期画面表示
+     */
+    @GetMapping (value = "/")
+    public String list (User user, Model model) {
+        List<Event> events = eventService.findAll ();
+        model.addAttribute ("events", events);
+        return "events/list";
+    }
+    
+    @GetMapping (value = "/events/view/{id}")
+    public String views (@PathVariable Integer id, Model model) {
+        Event event = new Event ();
+        try {
+            event = eventService.findById (id);
+        } catch (DataNotFoundException e) {
+            // TODO 自動生成された catch ブロック
+            e.printStackTrace ();
+        }
+        model.addAttribute ("event", event);
+        return "events/detail";
+    }
+    
+    // /*
+    // * 新規登録
+    // */
+    // @PostMapping (value = "/create")
+    // public String register (@Validated (Create.class) User user, BindingResult
+    // result, Model model,
+    // RedirectAttributes ra) {
+    // FlashData flash;
+    // try {
+    // if (result.hasErrors ()) {
+    // return "users/create";
+    // }
+    // if (!userService.isUnique (user.getEmail ())) {
+    // // emailが重複している
+    // flash = new FlashData ().danger ("メールアドレスが重複しています");
+    // model.addAttribute ("flash", flash);
+    // return "users/create";
+    // }
+    // // 平文のパスワードを暗号文にする
+    // user.encodePassword (user.getPassword ());
+    // // 新規登録
+    // userService.save (user);
+    // user.setAuth (true);
+    // flash = new FlashData ().success ("新規作成しました");
+    // } catch (Exception e) {
+    // flash = new FlashData ().danger ("処理中にエラーが発生しました");
+    // }
+    // ra.addFlashAttribute ("flash", flash);
+    // return "redirect:/users/login";
+    // }
+    
+    /*
+     * ログイン画面表示
+     */
+    @GetMapping (value = "/login")
+    public String loginForm (User user, Model model) {
+        return "users/login";
+    }
+    
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="リソース名 &apos;order/src/main/java/com/example/demo/web/admin/OrderDetailsController2.java&apos; を &apos;OrderDetailsController.java&apos; に変更します" description="リソース &apos;OrderDetailsController2.java&apos; の名前変更" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/java/com/example/demo/web/admin/OrderDetailsController2.java" name="OrderDetailsController.java" stamp="1706860754281" updateReferences="true"/>
+</session>
