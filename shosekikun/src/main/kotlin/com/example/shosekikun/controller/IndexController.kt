@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("")
 class IndexController {
 
-    @GetMapping("", "/")
+    @GetMapping("")
     fun index(
         model: Model,
     ): String {
