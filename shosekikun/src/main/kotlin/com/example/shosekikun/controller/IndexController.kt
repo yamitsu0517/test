@@ -13,6 +13,7 @@ class IndexController {
     fun index(
         model: Model,
     ): String {
-        return "index/index";
+        return "hello"
+//        return "index/index";
     }
 }

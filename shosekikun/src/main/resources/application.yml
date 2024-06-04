@@ -12,4 +12,4 @@ spring:
     cache: false # thymeleaf について、アプリ再起動しなくとも反映するようにする修正
 server:
   servlet:
-    context-path: #/book # /api/v1  これをいれると、デフォルトパスを決められる
+    context-path: /book # /api/v1  これをいれると、デフォルトパスを決められる
