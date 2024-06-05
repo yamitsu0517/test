@@ -7,7 +7,7 @@ import com.example.shosekikun.entity.Author
 import com.example.shosekikun.entity.AuthorId
 import com.example.shosekikun.entity.Book
 import com.example.shosekikun.form.AuthorForm
-import com.example.shosekikun.presenter.book.BookPresenter
+import com.example.shosekikun.presenter.author.AuthorPresenter
 import com.example.shosekikun.usecase.AuthorUsecase
 import com.example.shosekikun.usecase.BookUsecase
 import org.springframework.stereotype.Controller
@@ -33,8 +33,8 @@ class AuthorsController(
     @GetMapping
     fun list(model: Model): String {
         model.addAttribute(
-            "authorsPresenter", BookPresenter(
-                authorUsecase.getAllAuthors()
+            "authorsPresenter", AuthorPresenter(
+                authorUsecase.findAll()
             )
         )
         return "authors/list"

@@ -5,6 +5,7 @@ import com.example.shosekikun.entity.AuthorId
 import com.example.shosekikun.entity.Book
 import com.example.shosekikun.entity.BookId
 import com.example.shosekikun.entity.CategoryId
+import com.example.shosekikun.form.BookForm
 import com.example.shosekikun.repository.BookRepository
 import org.springframework.stereotype.Service
 
@@ -32,7 +33,11 @@ class BookUsecase(
         return bookRepository.findBy(categoryId)
     }
 
-    fun save(book: Book) {
+    fun create(book: BookForm) {
+        bookRepository.insert(book)
+    }
+
+    fun save(book: BookForm) {
         bookRepository.save(book)
     }
 

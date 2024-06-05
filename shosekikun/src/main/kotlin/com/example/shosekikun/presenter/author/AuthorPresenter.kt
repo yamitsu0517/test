@@ -1,7 +1,7 @@
-package com.example.shosekikun.presenter.book
+package com.example.shosekikun.presenter.author
 
 import com.example.shosekikun.entity.Author
 
-data class BookPresenter(
+data class AuthorPresenter(
     val authors: List<Author>
 )

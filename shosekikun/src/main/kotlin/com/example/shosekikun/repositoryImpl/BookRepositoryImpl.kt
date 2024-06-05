@@ -4,14 +4,15 @@ import com.example.shosekikun.entity.AuthorId
 import com.example.shosekikun.entity.Book
 import com.example.shosekikun.entity.BookId
 import com.example.shosekikun.entity.CategoryId
+import com.example.shosekikun.form.BookForm
 import com.example.shosekikun.repository.BookRepository
 import org.springframework.stereotype.Repository
 
 @Repository
 class BookRepositoryImpl(
-): BookRepository {
+) : BookRepository {
     override fun findAll(): List<Book> {
-        return  emptyList()
+        return emptyList()
 //        return  categoryMapper.findAll().map {
 //            Book(
 //                id = BookId(it.categoryId ?: throw DataNotFoundException("idが見つかりませんでした。")),
@@ -21,7 +22,7 @@ class BookRepositoryImpl(
     }
 
     override fun findBy(id: BookId): Book {
-        return  Book.EMPTY
+        return Book.EMPTY
     }
 
     override fun findBy(id: AuthorId): List<Book> {
@@ -32,7 +33,11 @@ class BookRepositoryImpl(
         return emptyList()
     }
 
-    override fun save(id: Book) {
+    override fun insert(form: BookForm) {
+        
+    }
+
+    override fun save(form: BookForm) {
         return
     }
 

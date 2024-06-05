@@ -13,7 +13,7 @@ class AuthorUsecase(
     @Autowired
     private val authorRepository: AuthorRepository,
 ) {
-    fun getAllAuthors(): List<Author> {
+    fun findAll(): List<Author> {
         return authorRepository.findAll()
     }
 
