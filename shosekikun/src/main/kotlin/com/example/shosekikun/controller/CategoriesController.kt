@@ -3,6 +3,7 @@ package com.example.shosekikun.controller
 import com.example.shosekikun.entity.Category
 import com.example.shosekikun.usecase.BookUsecase
 import com.example.shosekikun.usecase.CategoryUsecase
+import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping

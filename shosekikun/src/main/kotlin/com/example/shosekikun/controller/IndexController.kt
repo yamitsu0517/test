@@ -9,11 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("")
 class IndexController {
 
-    @GetMapping("")
+    @GetMapping("/", "")
     fun index(
         model: Model,
     ): String {
-        return "hello"
-//        return "index/index";
+        return "index/index";
+    }
+
+    @GetMapping("/error")
+    fun error(): String {
+        return "error/error"
     }
 }

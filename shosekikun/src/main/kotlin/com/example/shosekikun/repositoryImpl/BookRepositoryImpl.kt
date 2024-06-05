@@ -1,12 +1,10 @@
 package com.example.shosekikun.repositoryImpl
 
-import com.example.shosekikun.common.DataNotFoundException
-import com.example.shosekikun.entity.*
-import com.example.shosekikun.mapper.CategoryMapper
+import com.example.shosekikun.entity.AuthorId
+import com.example.shosekikun.entity.Book
+import com.example.shosekikun.entity.BookId
+import com.example.shosekikun.entity.CategoryId
 import com.example.shosekikun.repository.BookRepository
-import com.example.shosekikun.repository.CategoryRepository
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
 
 @Repository

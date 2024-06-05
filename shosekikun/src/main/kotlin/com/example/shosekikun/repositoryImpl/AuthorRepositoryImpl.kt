@@ -2,7 +2,7 @@ package com.example.shosekikun.repositoryImpl
 
 import com.example.shosekikun.common.DataNotFoundException
 import com.example.shosekikun.entity.*
-import com.example.shosekikun.mapper.CategoryMapper
+//import com.example.shosekikun.mapper.CategoryMapper
 import com.example.shosekikun.repository.AuthorRepository
 import com.example.shosekikun.repository.BookRepository
 import com.example.shosekikun.repository.CategoryRepository

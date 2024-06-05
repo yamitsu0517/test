@@ -17,10 +17,10 @@
 					<th scope="col" class="actions">アクション</th>
 				</tr>
 				<tr th:each="category: ${categories}" th:object="${category}">
-					<td th:text="*{id}"></td>
+					<td th:text="*{id.toString()}"></td>
 					<td th:text="*{name}"></td>
-					<td th:text="*{createdAt}"></td>
-					<td th:text="*{modifiedAt}"></td>
+					<td th:text="*{createDate}"></td>
+					<td th:text="*{updateDate}"></td>
 					<td class="actions text-nowrap">
 						<a th:href="@{/categories/edit/{id}(id=*{id})}" class="btn btn-primary">編集</a>
 						<a th:href="@{/categories/delete/{id}(id=*{id})}" class="btn btn-danger">削除</a>
