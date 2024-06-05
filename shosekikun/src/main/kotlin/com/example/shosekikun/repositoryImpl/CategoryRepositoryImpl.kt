@@ -1,6 +1,6 @@
 package com.example.shosekikun.repositoryImpl
 
-import com.example.shosekikun.common.DataNotFoundException
+import com.example.shosekikun.common.DateUtil
 import com.example.shosekikun.entity.Category
 import com.example.shosekikun.entity.CategoryId
 import com.example.shosekikun.mapper.CategoryMapper
@@ -10,27 +10,49 @@ import org.springframework.stereotype.Repository
 @Repository
 class CategoryRepositoryImpl(
     private val categoryMapper: CategoryMapper,
-): CategoryRepository {
+) : CategoryRepository {
     override fun findAll(): List<Category> {
-        return  categoryMapper.findAll().map {
+        return categoryMapper.findAll().map {
             Category(
-                id = CategoryId(it.categoryId ?: throw DataNotFoundException("idが見つかりませんでした。")),
+                // id が取得できないことはないため、ヌルポにはならない
+                id = CategoryId(it.id!!),
                 name = it.name ?: "",
-                createDate = it.createDate,
-                updateDate = it.updateDate,
+                createDate = it.createdAt,
+                updateDate = it.modifiedAt,
             )
         }
     }
 
     override fun findBy(id: CategoryId): Category {
-        return Category.EMPTY
+        return categoryMapper.findBy(id.toString()).let {
+            Category(
+                // id が取得できないことはないため、ヌルポにはならない
+                id = CategoryId(it.id!!),
+                name = it.name ?: "",
+                createDate = it.createdAt,
+                updateDate = it.modifiedAt
+            )
+        }
+    }
+
+    override fun insert(categoryName: String) {
+        categoryMapper.insert(
+            name = categoryName,
+            now = DateUtil.getNow(),
+        )
     }
 
     override fun save(category: Category) {
-        return
+        categoryMapper.update(
+            id = category.id.asInt(),
+            name = category.name,
+            now = DateUtil.getNow(),
+        )
     }
 
     override fun delete(categoryId: CategoryId) {
-        return
+        categoryMapper.delete(
+            id = categoryId.asInt(),
+        )
     }
 }

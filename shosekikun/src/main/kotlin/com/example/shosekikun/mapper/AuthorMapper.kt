@@ -1,6 +1,6 @@
 package com.example.shosekikun.mapper
 
-import com.example.shosekikun.dto.CategoryDto
+import com.example.shosekikun.dto.AuthorDto
 import org.apache.ibatis.annotations.Delete
 import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.Mapper
@@ -9,33 +9,33 @@ import org.apache.ibatis.annotations.Update
 import java.time.LocalDateTime
 
 @Mapper
-interface CategoryMapper {
+interface AuthorMapper {
     @Select(
         """
         SELECT
             *
         FROM
-            CATEGORIES
+            AUTHORS
     """
     )
-    fun findAll(): List<CategoryDto>
+    fun findAll(): List<AuthorDto>
 
     @Select(
         """
         SELECT
             *
         FROM
-            CATEGORIES
+            AUTHORS
         WHERE
             id = #{id}
     """
     )
-    fun findBy(id: String): CategoryDto
+    fun findBy(id: Int): AuthorDto
 
     @Insert(
         """
         INSERT INTO
-            CATEGORIES
+            AUTHORS
         (
               NAME
             , CREATED_AT
@@ -53,7 +53,7 @@ interface CategoryMapper {
     @Update(
         """
         UPDATE
-            CATEGORIES
+            AUTHORS
         SET
               NAME = #{name}
             , modified_at = #{now}
@@ -66,10 +66,11 @@ interface CategoryMapper {
     @Delete(
         """
         DELETE FROM
-            CATEGORIES
+            AUTHORS
         WHERE
             id = #{id}
     """
     )
     fun delete(id: Int)
+
 }

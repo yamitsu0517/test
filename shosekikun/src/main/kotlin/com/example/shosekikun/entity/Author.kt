@@ -1,13 +1,14 @@
 package com.example.shosekikun.entity
 
+import com.example.shosekikun.common.DateUtil
+import java.time.LocalDateTime
+
 data class Author(
     val id: AuthorId,
     val name: String,
+    private val createDate: LocalDateTime? = null,
+    private val updateDate: LocalDateTime? = null,
 ) {
-    companion object {
-        val EMPTY = Author(
-            id = AuthorId(0),
-            name = "",
-        )
-    }
+    val createDateFormated: String = DateUtil.dateFormat(createDate ?: DateUtil.getNow())
+    val updateDateFormated: String = DateUtil.dateFormat(updateDate ?: DateUtil.getNow())
 }

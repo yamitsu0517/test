@@ -10,6 +10,8 @@ spring:
       encoding: utf-8
   thymeleaf:
     cache: false # thymeleaf について、アプリ再起動しなくとも反映するようにする修正
+    prefix: file:src/main/resources/templates/ # コレ！！！
+
 server:
   servlet:
     context-path: #/book # /api/v1  これをいれると、デフォルトパスを決められる

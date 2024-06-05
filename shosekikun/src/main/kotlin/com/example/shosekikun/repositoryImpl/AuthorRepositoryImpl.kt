@@ -1,38 +1,49 @@
 package com.example.shosekikun.repositoryImpl
 
-import com.example.shosekikun.common.DataNotFoundException
-import com.example.shosekikun.entity.*
-//import com.example.shosekikun.mapper.CategoryMapper
+import com.example.shosekikun.common.DateUtil
+import com.example.shosekikun.entity.Author
+import com.example.shosekikun.entity.AuthorId
+import com.example.shosekikun.mapper.AuthorMapper
 import com.example.shosekikun.repository.AuthorRepository
-import com.example.shosekikun.repository.BookRepository
-import com.example.shosekikun.repository.CategoryRepository
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
 
 @Repository
 class AuthorRepositoryImpl(
-): AuthorRepository {
+    private val authorMapper: AuthorMapper,
+) : AuthorRepository {
     override fun findAll(): List<Author> {
-        return  emptyList()
-//        return  categoryMapper.findAll().map {
-//            Book(
-//                id = BookId(it.categoryId ?: throw DataNotFoundException("idが見つかりませんでした。")),
-//                title = it.name ?: "",
-//            )
-//        }
+        return authorMapper.findAll().map {
+            Author(
+                id = AuthorId(it.id!!),
+                name = it.name ?: "",
+                createDate = it.createdAt,
+                updateDate = it.modifiedAt,
+            )
+        }
     }
 
     override fun findBy(id: AuthorId): Author {
-        return Author.EMPTY
+        return authorMapper.findBy(id.asInt()).let {
+            Author(
+                id = AuthorId(it.id!!),
+                name = it.name ?: "",
+                createDate = it.createdAt,
+                updateDate = it.modifiedAt,
+            )
+        }
     }
 
-    override fun save(author: Author) {
+    override fun insert(authorName: String) {
+        authorMapper.insert(authorName, DateUtil.getNow())
+    }
 
+    override fun update(author: Author) {
+        println("impl: $author")
+        authorMapper.update(author.id.asInt(), author.name, DateUtil.getNow())
     }
 
     override fun delete(authorId: AuthorId) {
-
+        authorMapper.delete(authorId.asInt())
     }
 
 }

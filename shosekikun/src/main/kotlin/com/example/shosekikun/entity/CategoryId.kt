@@ -4,4 +4,5 @@ data class CategoryId(
     private val categoryId: Int,
 ) {
     override fun toString(): String = categoryId.toString()
+    fun asInt(): Int = categoryId
 }

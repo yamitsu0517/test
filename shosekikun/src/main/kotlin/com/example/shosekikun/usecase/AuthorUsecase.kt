@@ -3,6 +3,7 @@ package com.example.shosekikun.usecase
 import com.example.shosekikun.common.DataNotFoundException
 import com.example.shosekikun.entity.Author
 import com.example.shosekikun.entity.AuthorId
+import com.example.shosekikun.form.AuthorForm
 import com.example.shosekikun.repository.AuthorRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -12,7 +13,7 @@ class AuthorUsecase(
     @Autowired
     private val authorRepository: AuthorRepository,
 ) {
-    fun findAll(): List<Author> {
+    fun getAllAuthors(): List<Author> {
         return authorRepository.findAll()
     }
 
@@ -21,8 +22,12 @@ class AuthorUsecase(
         return authorRepository.findBy(id)
     }
 
+    fun create(author: AuthorForm) {
+        authorRepository.insert(author.name!!)
+    }
+
     fun save(author: Author) {
-        authorRepository.save(author)
+        authorRepository.update(author)
     }
 
     fun delete(id: AuthorId) {

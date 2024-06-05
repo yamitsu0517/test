@@ -4,9 +4,6 @@ import com.example.shosekikun.common.DataNotFoundException
 import com.example.shosekikun.entity.Category
 import com.example.shosekikun.entity.CategoryId
 import com.example.shosekikun.repository.CategoryRepository
-import lombok.RequiredArgsConstructor
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 
 @Service
@@ -18,7 +15,7 @@ class CategoryUsecase(
         return categoryRepository.findAll()
     }
 
-    fun findById(id: CategoryId): Category {
+    fun getCategoryBy(id: CategoryId): Category {
         try {
             return categoryRepository.findBy(id)
         } catch (e: DataNotFoundException) {
@@ -26,6 +23,10 @@ class CategoryUsecase(
             throw e
         }
 
+    }
+
+    fun create(category: String) {
+        categoryRepository.insert(category)
     }
 
     fun save(category: Category) {

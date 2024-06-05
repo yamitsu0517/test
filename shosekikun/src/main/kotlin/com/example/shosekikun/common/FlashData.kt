@@ -13,6 +13,9 @@ class FlashData {
     private var key: String = ""
     private var message: String = ""
 
+    fun getKey() = key
+    fun getMessage() = message
+
     fun FlashData() {
         this.key = INFO
     }

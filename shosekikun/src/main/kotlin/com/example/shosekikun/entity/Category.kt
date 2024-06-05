@@ -1,19 +1,14 @@
 package com.example.shosekikun.entity
 
+import com.example.shosekikun.common.DateUtil
 import java.time.LocalDateTime
 
 data class Category(
     val id: CategoryId,
     val name: String,
-    val createDate: LocalDateTime,
-    val updateDate: LocalDateTime,
+    private val createDate: LocalDateTime? = null,
+    private val updateDate: LocalDateTime? = null,
 ) {
-    companion object {
-        val EMPTY = Category(
-            id = CategoryId(0),
-            name = "",
-            createDate = LocalDateTime.now(),
-            updateDate = LocalDateTime.now(),
-        )
-    }
+    val createDateFormated: String = DateUtil.dateFormat(createDate ?: DateUtil.getNow())
+    val updateDateFormated: String = DateUtil.dateFormat(updateDate ?: DateUtil.getNow())
 }
