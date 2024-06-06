@@ -1,6 +1,5 @@
 package com.example.shosekikun.usecase
 
-import com.example.shosekikun.common.DataNotFoundException
 import com.example.shosekikun.entity.Category
 import com.example.shosekikun.entity.CategoryId
 import com.example.shosekikun.repository.CategoryRepository
@@ -16,12 +15,7 @@ class CategoryUsecase(
     }
 
     fun getCategoryBy(id: CategoryId): Category {
-        try {
-            return categoryRepository.findBy(id)
-        } catch (e: DataNotFoundException) {
-            // TODO: 挙動要確認
-            throw e
-        }
+        return categoryRepository.findBy(id)
 
     }
 
