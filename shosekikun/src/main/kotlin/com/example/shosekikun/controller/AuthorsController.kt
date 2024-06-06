@@ -28,13 +28,13 @@ class AuthorsController(
     private val authorUsecase: AuthorUsecase,
     private val bookUsecase: BookUsecase,
 ) {
-
-
     @GetMapping
     fun list(model: Model): String {
+        val authors = authorUsecase.findAll()
         model.addAttribute(
-            "authorsPresenter", AuthorPresenter(
-                authorUsecase.findAll()
+            "authorsPresenter",
+            AuthorPresenter(
+                authors = authors
             )
         )
         return "authors/list"
@@ -60,19 +60,23 @@ class AuthorsController(
                 model.addAttribute("author", AuthorForm())
                 return "authors/create"
             }
+            // 登録処理
             authorUsecase.create(author)
-            flash = FlashData().success("著者の登録が成功しました。")
+            flash = FlashData().success(Const.AUTHOR_REGIST_SUCCESS)
         } catch (e: Exception) {
-            flash = FlashData().danger("処理中にエラーが発生しました")
+            flash = FlashData().danger(Const.COMMON_ERROR_MESSAGE)
         }
         ra.addFlashAttribute("flash", flash)
         return "redirect:/authors"
     }
 
     @GetMapping("/edit/{id}")
-    fun edit(@PathVariable id: Int?, model: Model): String {
+    fun edit(@PathVariable id: Int, model: Model): String {
         try {
-            model.addAttribute("author", authorUsecase.findById(AuthorId(id ?: 0)))
+            model.addAttribute(
+                "author",
+                authorUsecase.findById(AuthorId(id))
+            )
         } catch (e: DataNotFoundException) {
             return "redirect:/authors"
         }
@@ -102,32 +106,30 @@ class AuthorsController(
                     name = author.name,
                 )
             )
-            flash = FlashData().success("著者の変更が完了しました")
+            flash = FlashData().success(Const.AUTHOR_EDIT_SUCCESS)
         } catch (e: Exception) {
-            println("$e")
-            flash = FlashData().danger("処理中にエラーが発生しました")
+            flash = FlashData().danger(Const.COMMON_ERROR_MESSAGE)
         }
         ra.addFlashAttribute("flash", flash)
         return "redirect:/authors"
     }
 
     @GetMapping("/delete/{id}")
-    fun delete(@PathVariable id: Int?, ra: RedirectAttributes): String {
+    fun delete(@PathVariable id: Int, ra: RedirectAttributes): String {
         var flash: FlashData
         try {
             val books: List<Book> = bookUsecase.findByAuthorId(AuthorId(id ?: 0))
             if (books.isEmpty()) {
-                authorUsecase.findById(AuthorId(id ?: 0))
-                authorUsecase.delete(AuthorId(id ?: 0))
-                flash = FlashData().success("著者の削除が完了しました")
+                authorUsecase.findById(AuthorId(id))
+                authorUsecase.delete(AuthorId(id))
+                flash = FlashData().success(Const.AUTHOR_DELETE_SUCCESS)
             } else {
-                flash = FlashData().danger("書籍に登録されている著者は削除できません")
+                flash = FlashData().danger(Const.AUTHOR_DELETE_EXISTS_BOOK)
             }
         } catch (e: DataNotFoundException) {
-            flash = FlashData().danger("該当データがありません")
+            flash = FlashData().danger(Const.COMMON_DELETE_NOT_FOUND)
         } catch (e: Exception) {
-            throw e
-            flash = FlashData().danger("処理中にエラーが発生しました")
+            flash = FlashData().danger(Const.COMMON_ERROR_MESSAGE)
         }
         ra.addFlashAttribute("flash", flash)
         return "redirect:/authors"

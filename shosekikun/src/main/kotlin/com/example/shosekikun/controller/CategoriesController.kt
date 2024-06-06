@@ -7,6 +7,7 @@ import com.example.shosekikun.entity.Book
 import com.example.shosekikun.entity.Category
 import com.example.shosekikun.entity.CategoryId
 import com.example.shosekikun.form.CategoryForm
+import com.example.shosekikun.presenter.category.CategoryEditPresenter
 import com.example.shosekikun.presenter.category.CategoryPresenter
 import com.example.shosekikun.usecase.BookUsecase
 import com.example.shosekikun.usecase.CategoryUsecase
@@ -40,7 +41,6 @@ class CategoriesController(
 
     @GetMapping("/create")
     fun create(
-//        @ModelAttribute category: CategoryForm,
         model: Model,
     ): String {
         model.addAttribute("category", CategoryForm())
@@ -50,7 +50,6 @@ class CategoriesController(
     @PostMapping("/create")
     fun create(
         @ModelAttribute category: CategoryForm,
-//        @Valid @NotEmpty @RequestBody categoryName: String?,
         result: BindingResult,
         model: Model,
         ra: RedirectAttributes
@@ -66,7 +65,7 @@ class CategoriesController(
             categoryService.create(category.name)
             flash = FlashData().success(Const.CATEGORY_REGIST_SUCCESS)
         } catch (e: Exception) {
-            flash = FlashData().danger(Const.CATEGORY_REGIST_FAILURE)
+            flash = FlashData().danger(Const.COMMON_ERROR_MESSAGE)
         }
         ra.addFlashAttribute("flash", flash)
         return "redirect:/categories"
@@ -77,7 +76,9 @@ class CategoriesController(
         try {
             model.addAttribute(
                 "category",
-                categoryService.getCategoryBy(CategoryId(id))
+                CategoryEditPresenter(
+                    category = categoryService.getCategoryBy(CategoryId(id))
+                )
             )
         } catch (e: DataNotFoundException) {
             return "redirect:/authors"
@@ -88,7 +89,6 @@ class CategoriesController(
     @PostMapping("/edit")
     fun edit(
         @ModelAttribute category: CategoryForm,
-//        @Valid @NotEmpty @RequestBody categoryName: String?,
         result: BindingResult,
         model: Model,
         ra: RedirectAttributes
@@ -99,7 +99,7 @@ class CategoriesController(
             if (category.id == null || category.name.isNullOrEmpty()) {
                 model.addAttribute("messages", listOf(Const.CATEGORY_FORM_ERROR_MESSAGE1))
                 model.addAttribute("category", category)
-                return "categories/edit"
+                return "categories/edit/"
             }
             categoryService.save(
                 Category(
@@ -109,7 +109,7 @@ class CategoriesController(
             )
             flash = FlashData().success(Const.CATEGORY_UPDATE_SUCCESS)
         } catch (e: Exception) {
-            flash = FlashData().danger(Const.CATEGORY_UPDATE_FAILURE)
+            flash = FlashData().danger(Const.COMMON_ERROR_MESSAGE)
         }
         ra.addFlashAttribute("flash", flash)
         return "redirect:/categories"
@@ -129,9 +129,9 @@ class CategoriesController(
                 flash = FlashData().danger(Const.CATEGORY_DELETE_BOOK_EXISTS)
             }
         } catch (e: DataNotFoundException) {
-            flash = FlashData().danger(Const.CATEGORY_DELETE_NOT_FOUND)
+            flash = FlashData().danger(Const.COMMON_DELETE_NOT_FOUND)
         } catch (e: Exception) {
-            flash = FlashData().danger(Const.CATEGORY_DELETE_FAILURE)
+            flash = FlashData().danger(Const.COMMON_ERROR_MESSAGE)
         }
         ra.addFlashAttribute("flash", flash)
         return "redirect:/categories"

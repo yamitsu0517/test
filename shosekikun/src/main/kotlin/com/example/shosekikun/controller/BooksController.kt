@@ -1,5 +1,6 @@
 package com.example.shosekikun.controller
 
+import com.example.shosekikun.common.Const
 import com.example.shosekikun.common.DataNotFoundException
 import com.example.shosekikun.common.FlashData
 import com.example.shosekikun.entity.Author
@@ -8,6 +9,7 @@ import com.example.shosekikun.entity.Category
 import com.example.shosekikun.form.BookForm
 import com.example.shosekikun.presenter.book.BookCreatePresenter
 import com.example.shosekikun.presenter.book.BookEditPresenter
+import com.example.shosekikun.presenter.book.BookPresenter
 import com.example.shosekikun.usecase.AuthorUsecase
 import com.example.shosekikun.usecase.BookUsecase
 import com.example.shosekikun.usecase.CategoryUsecase
@@ -31,7 +33,12 @@ class BooksController(
 ) {
     @GetMapping
     fun list(model: Model): String {
-        model.addAttribute("books", bookUsecase.findAll())
+        model.addAttribute(
+            "bookPresenter",
+            BookPresenter(
+                books = bookUsecase.findAll()
+            )
+        )
         return "books/list"
     }
 
@@ -71,10 +78,11 @@ class BooksController(
                 )
                 return "books/create"
             }
+            // 登録処理
             bookUsecase.create(book)
-            flash = FlashData().success("書籍の追加が完了しました")
+            flash = FlashData().success(Const.BOOK_REGIST_SUCCESS)
         } catch (e: Exception) {
-            flash = FlashData().danger("処理中にエラーが発生しました")
+            flash = FlashData().danger(Const.COMMON_ERROR_MESSAGE)
         }
         ra.addFlashAttribute("flash", flash)
         return "redirect:/books"
@@ -105,28 +113,26 @@ class BooksController(
                 return "books/edit/" + book.id
             }
             bookUsecase.save(book)
-            flash = FlashData().success("書籍の更新が完了しました")
+            flash = FlashData().success(Const.BOOK_EDIT_SUCCESS)
         } catch (e: Exception) {
-            throw e
-            flash = FlashData().danger("処理中にエラーが発生しました")
+            flash = FlashData().danger(Const.COMMON_ERROR_MESSAGE)
         }
         ra.addFlashAttribute("flash", flash)
         return "redirect:/books"
     }
 
     @GetMapping("/delete/{id}")
-    fun delete(@PathVariable id: Int?, ra: RedirectAttributes): String {
+    fun delete(@PathVariable id: Int, ra: RedirectAttributes): String {
         var flash: FlashData
         try {
-            id ?: throw DataNotFoundException("IDがありません。")
             bookUsecase.findById(BookId(id))
             bookUsecase.delete(BookId(id))
-            flash = FlashData().success("書籍の削除が完了しました")
+            flash = FlashData().success(Const.BOOK_DELETE_SUCCESS)
             ra.addFlashAttribute("flash", flash)
         } catch (e: DataNotFoundException) {
-            flash = FlashData().danger("該当データがありません")
+            flash = FlashData().danger(Const.COMMON_DELETE_NOT_FOUND)
         } catch (e: Exception) {
-            flash = FlashData().danger("処理中にエラーが発生しました")
+            flash = FlashData().danger(Const.COMMON_ERROR_MESSAGE)
         }
         ra.addFlashAttribute("flash", flash)
         return "redirect:/books"
@@ -172,10 +178,10 @@ class BooksController(
 
     private fun getErrorMessage(form: BookForm): List<String> {
         val messages = mutableListOf<String>()
-        if (form.price == null || form.price < 1) messages.add("価格を入力してください。")
-        if (form.title.isNullOrEmpty()) messages.add("タイトルを入力してください。")
-        if (form.categoryId == null) messages.add("カテゴリを指定してください。")
-        if (form.authorId == null) messages.add("著者を指定してください。")
+        if (form.title.isNullOrEmpty()) messages.add(Const.VALID_MESSAGE_TITLE)
+        if (form.price == null || form.price < 1) messages.add(Const.VALID_MESSAGE_PRICE)
+        if (form.categoryId == null) messages.add(Const.VALID_MESSAGE_CATEGORY)
+        if (form.authorId == null) messages.add(Const.VALID_MESSAGE_AUTHOR)
 
         return messages
     }

@@ -18,7 +18,7 @@
             <th scope="col">更新日時</th>
             <th scope="col" class="actions">アクション</th>
         </tr>
-        <tr th:each="book: ${books}" th:object="${book}">
+        <tr th:each="book: ${bookPresenter.books}" th:object="${book}">
             <td th:text="*{id}"></td>
             <td th:text="*{title}"></td>
             <td th:text="*{price}"></td>

@@ -135,5 +135,4 @@ interface BookMapper {
     """
     )
     fun delete(id: Int)
-
 }

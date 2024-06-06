@@ -72,5 +72,4 @@ interface AuthorMapper {
     """
     )
     fun delete(id: Int)
-
 }

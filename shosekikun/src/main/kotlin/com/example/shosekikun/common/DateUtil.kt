@@ -8,7 +8,7 @@ class DateUtil {
         fun getNow(): LocalDateTime {
             return LocalDateTime.now()
         }
-        
+
         fun dateFormat(dateTime: LocalDateTime): String {
             val dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
             return dateTime.format(dtf)
