@@ -18,7 +18,7 @@
             <th scope="col" class="actions">アクション</th>
         </tr>
         <tr th:each="author: ${authorsPresenter.authors}" th:object="${author}">
-            <td th:text="*{id.toString()}"></td>
+            <td th:text="*{id.asInt()}"></td>
             <td th:text="*{name}"></td>
             <td th:text="*{createDateFormated}"></td>
             <td th:text="*{updateDateFormated}"></td>

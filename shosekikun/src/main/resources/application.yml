@@ -29,5 +29,9 @@ logging:
           # INFO
           # mapper: INFO → ログにSQL出さない。 DEBUG → ログにSQL出す。
           mapper: DEBUG
-#          repository:
-#            DemoMapperXml: DEBUG
+  #          repository:
+  #            DemoMapperXml: DEBUG
+
+flyway:
+  enable: true
+  baseline-on-migrate: true

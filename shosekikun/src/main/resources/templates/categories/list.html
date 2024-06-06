@@ -18,7 +18,7 @@
             <th scope="col" class="actions">アクション</th>
         </tr>
         <tr th:each="category: ${categoryPresenter.getCategories()}" th:object="${category}">
-            <td th:text="*{id.toString()}"></td>
+            <td th:text="*{id.asInt()}"></td>
             <td th:text="*{name}"></td>
             <td th:text="*{createDateFormated}"></td>
             <td th:text="*{updateDateFormated}"></td>

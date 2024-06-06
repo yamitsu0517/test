@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
-
 @Controller
 @RequestMapping("/authors")
 class AuthorsController(
@@ -118,7 +117,7 @@ class AuthorsController(
     fun delete(@PathVariable id: Int, ra: RedirectAttributes): String {
         var flash: FlashData
         try {
-            val books: List<Book> = bookUsecase.findByAuthorId(AuthorId(id ?: 0))
+            val books: List<Book> = bookUsecase.findByAuthorId(AuthorId(id))
             if (books.isEmpty()) {
                 authorUsecase.findById(AuthorId(id))
                 authorUsecase.delete(AuthorId(id))
