@@ -7,6 +7,7 @@ import com.example.shosekikun.entity.BookId
 import com.example.shosekikun.entity.Category
 import com.example.shosekikun.form.BookForm
 import com.example.shosekikun.presenter.book.BookCreatePresenter
+import com.example.shosekikun.presenter.book.BookEditPresenter
 import com.example.shosekikun.usecase.AuthorUsecase
 import com.example.shosekikun.usecase.BookUsecase
 import com.example.shosekikun.usecase.CategoryUsecase
@@ -39,13 +40,12 @@ class BooksController(
         val categories: List<Category> = categoryUsecase.findAll()
         val authors: List<Author> = authorUsecase.findAll()
 
-        model.addAttribute(
-            "bookCreatePresenter", BookCreatePresenter(
-                categories = categories,
-                authors = authors
-            )
+        addCreateModel(
+            model = model,
+            categories = categories,
+            authors = authors,
+            book = BookForm(),
         )
-        model.addAttribute("book", BookForm())
         return "books/create"
     }
 
@@ -58,13 +58,21 @@ class BooksController(
     ): String {
         var flash: FlashData
         try {
-            if (validate(book)) {
-                model.addAttribute("isNew", book?.id == null)
-                return "books/form"
+            val messages = getErrorMessage(book)
+            if (messages.isNotEmpty()) {
+                val categories: List<Category> = categoryUsecase.findAll()
+                val authors: List<Author> = authorUsecase.findAll()
+                addCreateModel(
+                    model = model,
+                    categories = categories,
+                    authors = authors,
+                    messages = messages,
+                    book = book
+                )
+                return "books/create"
             }
-            val type = if ((book.id == null)) "追加" else "編集"
-            bookUsecase.save(book)
-            flash = FlashData().success("書籍の" + type + "が完了しました")
+            bookUsecase.create(book)
+            flash = FlashData().success("書籍の追加が完了しました")
         } catch (e: Exception) {
             flash = FlashData().danger("処理中にエラーが発生しました")
         }
@@ -74,13 +82,12 @@ class BooksController(
 
     @GetMapping("/edit/{id}")
     fun edit(@PathVariable id: Int, model: Model): String {
-        model.addAttribute("isNew", false)
         try {
-            model.addAttribute("book", bookUsecase.findById(BookId(id)))
+            addEditModel(model, id)
         } catch (e: DataNotFoundException) {
             return "redirect:/books"
         }
-        return "books/form"
+        return "books/edit"
     }
 
     @PostMapping("/edit")
@@ -92,14 +99,15 @@ class BooksController(
     ): String {
         var flash: FlashData
         try {
-            if (result.hasErrors()) {
-                model.addAttribute("isNew", book?.id == null)
-                return "books/form"
+            val messages = getErrorMessage(book)
+            if (messages.isNotEmpty()) {
+                addEditModel(model, book.id!!)
+                return "books/edit/" + book.id
             }
-            val type = if ((book?.id == null)) "追加" else "編集"
             bookUsecase.save(book)
-            flash = FlashData().success("書籍の" + type + "が完了しました")
+            flash = FlashData().success("書籍の更新が完了しました")
         } catch (e: Exception) {
+            throw e
             flash = FlashData().danger("処理中にエラーが発生しました")
         }
         ra.addFlashAttribute("flash", flash)
@@ -124,12 +132,51 @@ class BooksController(
         return "redirect:/books"
     }
 
-    private fun validate(form: BookForm): Boolean {
-        if (form.price == null || form.price < 1) return true
-        if (form.title.isNullOrEmpty()) return true
-        if (form.categoryId == null) return true
-        if (form.authorId == null) return true
+    private fun addCreateModel(
+        model: Model,
+        book: BookForm,
+        categories: List<Category>,
+        authors: List<Author>,
+        messages: List<String> = emptyList(),
+    ) {
+        model.addAttribute(
+            "bookCreatePresenter", BookCreatePresenter(
+                categories = categories,
+                authors = authors
+            )
+        )
+        model.addAttribute("book", book)
+        model.addAttribute("messages", messages)
+    }
 
-        return false
+    private fun addEditModel(model: Model, bookId: Int) {
+        val book = bookUsecase.findById(BookId(bookId))
+        val categories: List<Category> = categoryUsecase.findAll()
+        val authors: List<Author> = authorUsecase.findAll()
+        model.addAttribute(
+            "bookEditPresenter", BookEditPresenter(
+                authors = authors,
+                categories = categories,
+            )
+        )
+        model.addAttribute(
+            "bookForm", BookForm(
+                id = book.id.asInt(),
+                title = book.title,
+                price = book.price,
+                authorId = book.author.id.asInt(),
+                categoryId = book.category.id.asInt(),
+            )
+        )
+    }
+
+    private fun getErrorMessage(form: BookForm): List<String> {
+        val messages = mutableListOf<String>()
+        if (form.price == null || form.price < 1) messages.add("価格を入力してください。")
+        if (form.title.isNullOrEmpty()) messages.add("タイトルを入力してください。")
+        if (form.categoryId == null) messages.add("カテゴリを指定してください。")
+        if (form.authorId == null) messages.add("著者を指定してください。")
+
+        return messages
     }
 }

@@ -126,6 +126,7 @@ class AuthorsController(
         } catch (e: DataNotFoundException) {
             flash = FlashData().danger("該当データがありません")
         } catch (e: Exception) {
+            throw e
             flash = FlashData().danger("処理中にエラーが発生しました")
         }
         ra.addFlashAttribute("flash", flash)

@@ -39,13 +39,11 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     // https://mvnrepository.com/artifact/jakarta.validation/beanvalidation-standalone-container-adapter
-//    implementation("jakarta.validation:beanvalidation-standalone-container-adapter:3.0.1")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-
 
     // DB
     implementation("org.flywaydb:flyway-mysql")
-    implementation("mysql:mysql-connector-java:8.0.20")
+    implementation("mysql:mysql-connector-java:8.0.28")
     implementation("org.mariadb.jdbc:mariadb-java-client:2.4.4")
     implementation("org.mybatis:mybatis:3.5.16")
 

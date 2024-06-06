@@ -14,6 +14,7 @@ class AuthorRepositoryImpl(
     override fun findAll(): List<Author> {
         return authorMapper.findAll().map {
             Author(
+                // id が取得できないことはないため、ヌルポにはならない
                 id = AuthorId(it.id!!),
                 name = it.name ?: "",
                 createDate = it.createdAt,

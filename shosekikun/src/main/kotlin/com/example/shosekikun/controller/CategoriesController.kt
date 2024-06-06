@@ -75,9 +75,6 @@ class CategoriesController(
     @GetMapping("/edit/{id}")
     fun edit(@PathVariable id: Int, model: Model): String {
         try {
-            println("id: $id")
-            println(categoryService.getCategoryBy(CategoryId(id)))
-
             model.addAttribute(
                 "category",
                 categoryService.getCategoryBy(CategoryId(id))

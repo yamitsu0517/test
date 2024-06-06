@@ -9,9 +9,25 @@ spring:
       mode: always
       encoding: utf-8
   thymeleaf:
+    # bootrun 起動ではなく、application で起動をすると効く。
     cache: false # thymeleaf について、アプリ再起動しなくとも反映するようにする修正
     prefix: file:src/main/resources/templates/ # コレ！！！
 
 server:
   servlet:
     context-path: #/book # /api/v1  これをいれると、デフォルトパスを決められる
+
+# ログにSQL結果を出す
+# https://ito-u-oti.com/post-1064/#outline__1
+logging:
+  level:
+    org:
+      springframework: WARN
+    com:
+      example:
+        shosekikun:
+          # INFO
+          # mapper: INFO → ログにSQL出さない。 DEBUG → ログにSQL出す。
+          mapper: DEBUG
+#          repository:
+#            DemoMapperXml: DEBUG
