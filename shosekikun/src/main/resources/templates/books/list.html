@@ -19,7 +19,7 @@
             <th scope="col" class="actions">アクション</th>
         </tr>
         <tr th:each="book: ${bookPresenter.books}" th:object="${book}">
-            <td th:text="*{id}"></td>
+            <td th:text="*{id.asInt()}"></td>
             <td th:text="*{title}"></td>
             <td th:text="*{price}"></td>
             <td th:text="*{author.name}"></td>

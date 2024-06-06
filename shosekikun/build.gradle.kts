@@ -37,6 +37,8 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3")
+    testImplementation("io.mockk:mockk:1.13.9")
+
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     // DB
