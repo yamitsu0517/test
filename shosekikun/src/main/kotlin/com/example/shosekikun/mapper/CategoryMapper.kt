@@ -30,7 +30,7 @@ interface CategoryMapper {
             id = #{id}
     """
     )
-    fun findBy(id: String): CategoryDto
+    fun findBy(id: Int): CategoryDto
 
     @Insert(
         """

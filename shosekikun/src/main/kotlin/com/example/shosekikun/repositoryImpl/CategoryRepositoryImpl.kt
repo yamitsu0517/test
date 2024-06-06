@@ -24,7 +24,7 @@ class CategoryRepositoryImpl(
     }
 
     override fun findBy(id: CategoryId): Category {
-        return categoryMapper.findBy(id.toString()).let {
+        return categoryMapper.findBy(id.asInt()).let {
             Category(
                 // id が取得できないことはないため、ヌルポにはならない
                 id = CategoryId(it.id!!),
