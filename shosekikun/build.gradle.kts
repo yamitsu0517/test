@@ -20,6 +20,8 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/jakarta.validation/beanvalidation-standalone-container-adapter
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -31,23 +33,21 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    compileOnly("org.projectlombok:lombok")
-    runtimeOnly("com.mysql:mysql-connector-j")
+
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-    // https://mvnrepository.com/artifact/jakarta.validation/beanvalidation-standalone-container-adapter
-    implementation("org.springframework.boot:spring-boot-starter-validation")
 
     // DB
     implementation("org.flywaydb:flyway-mysql")
     implementation("mysql:mysql-connector-java:8.0.28")
     implementation("org.mariadb.jdbc:mariadb-java-client:2.4.4")
     implementation("org.mybatis:mybatis:3.5.16")
+    runtimeOnly("com.mysql:mysql-connector-j")
 
     implementation("org.projectlombok:lombok")
+    compileOnly("org.projectlombok:lombok")
 
 }
 
@@ -55,11 +55,9 @@ kotlin {
     compilerOptions {
         freeCompilerArgs.addAll("-Xjsr305=strict")
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
-
     }
 
 }
-
 
 tasks.withType<Test> {
     useJUnitPlatform()
