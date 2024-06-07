@@ -1,6 +1,5 @@
 package com.example.shosekikun.usecase
 
-import com.example.shosekikun.common.DataNotFoundException
 import com.example.shosekikun.entity.AuthorId
 import com.example.shosekikun.entity.Book
 import com.example.shosekikun.entity.BookId
@@ -18,17 +17,14 @@ class BookUsecase(
         return bookRepository.findAll()
     }
 
-    @Throws(DataNotFoundException::class)
     fun findById(id: BookId): Book {
         return bookRepository.findBy(id)
     }
 
-    @Throws(DataNotFoundException::class)
     fun findByAuthorId(authorId: AuthorId): List<Book> {
         return bookRepository.findBy(authorId)
     }
 
-    @Throws(DataNotFoundException::class)
     fun findByCategoryId(categoryId: CategoryId): List<Book> {
         return bookRepository.findBy(categoryId)
     }
