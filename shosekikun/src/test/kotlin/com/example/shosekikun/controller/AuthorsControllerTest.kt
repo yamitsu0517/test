@@ -59,6 +59,8 @@ class AuthorsControllerTest(
                 .andExpect(view().name("authors/list"))
                 // モデルに追加された要素の確認
                 .andExpect(model().attribute("authorsPresenter", expectedPresenter))
+            // 今回は対象外だが、リダイレクト先の確認は以下で可能
+            //.andExpect(redirectedUrl("/authors"))
         }
     }
 }
